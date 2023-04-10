@@ -16,7 +16,9 @@ const Login = () => {
       initialValues: userCredentials,
       validationSchema: loginSchema,
       validateOnChange: true,
-      onSubmit: () => {},
+      onSubmit: () => {
+        router.push('/admin');
+      },
     });
   const colorTheme: string = 'light';
   return (

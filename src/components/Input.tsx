@@ -5,14 +5,13 @@ import {
   LockSimple,
   Phone,
 } from '@phosphor-icons/react';
-import type { BaseSyntheticEvent } from 'react';
 import { useState } from 'react';
 
 type InputProps = {
   ofType: 'email' | 'password' | 'text' | 'tel';
   validated?: string;
-  onChange: (e: BaseSyntheticEvent) => void;
-  topLabel: string;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  topLabel?: string;
   error?: string;
   bottomLabel?: string;
   value: string | number | boolean;
@@ -70,13 +69,17 @@ const Input = ({
       break;
   }
   return (
-    <div className="form-control relative mb-3 w-full">
-      <label className="label h-9">
-        <span className="label-text">{topLabel}</span>
-      </label>
-      <div className="pointer-events-none absolute left-4 top-[47px] flex">
-        {styleProps[ofType].icon}
-      </div>
+    <div className="form-control relative mt-2 ml-2 w-full flex-none">
+      {topLabel && (
+        <label className="label h-9">
+          <span className="label-text">{topLabel}</span>
+        </label>
+      )}
+      {styleProps[ofType].icon && (
+        <div className="pointer-events-none absolute left-4 top-[47px] mt-1.5 flex">
+          {styleProps[ofType].icon}
+        </div>
+      )}
       <input
         type={showPassword ? 'text' : ofType}
         className={style}
@@ -84,12 +87,14 @@ const Input = ({
         value={value}
         {...rest}
       />
-      <button
-        className="absolute right-5 top-[46px] flex pl-4"
-        onClick={() => setShowPassword((prev) => !prev)}
-      >
-        {styleProps[ofType].show}
-      </button>
+      {styleProps[ofType].show && (
+        <button
+          className="absolute right-5 top-[46px] mt-1.5 flex pl-4"
+          onClick={() => setShowPassword((prev) => !prev)}
+        >
+          {styleProps[ofType].show}
+        </button>
+      )}
       {(bottomLabel || error) && (
         <label className="label">
           <span className="label-text-alt text-error">{error}</span>

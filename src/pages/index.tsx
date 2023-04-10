@@ -11,20 +11,24 @@ function Index() {
     <Main meta={<Meta title="Home" description="Tryyon home page" />}>
       <Navbar path={[{ redirect: '/', display: 'Home' }]} heading="Tryyon" />
       <div className="flex h-screen">
-        <div className="w-4/6 p-36">
-          <AnimatedText tag="h3" className="text-3xl" animate="fadeInRight">
-            Welcome To
+        <div className="my-10 w-4/6 p-32">
+          <AnimatedText
+            tag="h3"
+            className="text-3xl text-primary"
+            animate="fadeInRight"
+          >
+            WELCOME TO
           </AnimatedText>
           <AnimatedText
             tag="h1"
-            className="mb-8 text-8xl font-bold"
+            className="mb-8 text-8xl font-bold text-primary"
             animate="fadeInRight"
           >
             Tryyon
           </AnimatedText>
           <AnimatedText
             tag="h1"
-            className="max-w-lg text-lg font-bold"
+            className="max-w-lg text-lg text-primary"
             animate="fadeIn"
           >
             Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nobis

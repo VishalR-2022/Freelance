@@ -3,39 +3,47 @@ import { useRouter } from 'next/router';
 import { IconContext } from 'react-icons';
 import { MdLightMode, MdPerson } from 'react-icons/md';
 
-import AnimatedText from './animation/motionText';
-import Search from './Search';
+import AnimatedText from '@/components/animation/motionText';
+import Search from '@/components/Search';
+import type { IBreadcrumb } from '@/layouts/admin';
 
 type NavbarProps = {
-  path: { redirect: string; display: string }[];
-  heading: string;
+  path?: IBreadcrumb[];
+  heading?: string;
 };
+
 const Navbar = ({ path, heading }: NavbarProps) => {
   const router = useRouter();
 
   return (
-    <div className="navbar fixed bg-transparent p-6">
-      <div className="flex-1">
-        <div className="flex flex-col">
-          {path.map((item) => {
-            return (
-              <Link
-                key={item.redirect}
-                className="cursor-pointer text-xl"
-                href={item.redirect}
-              >
-                {item.display}
-              </Link>
-            );
-          })}
-          <AnimatedText
-            tag="h3"
-            className="text-3xl font-bold text-indigo-900"
-            animate="fadeInRight"
-          >
-            {heading}
-          </AnimatedText>
+    <div className="navbar sticky top-0 mt-10 flex justify-between bg-base-100 p-6">
+      <div className="flex flex-col justify-start">
+        <div className="breadcrumbs text-sm">
+          <ul>
+            {path &&
+              path.length > 0 &&
+              path.map((item) => {
+                return (
+                  <li key={item.id}>
+                    <Link
+                      className="cursor-pointer text-xl"
+                      href={`${item.href}`}
+                    >
+                      {item.label}
+                    </Link>
+                  </li>
+                );
+              })}
+          </ul>
         </div>
+
+        <AnimatedText
+          tag="h2"
+          className="text-3xl font-bold text-indigo-900"
+          animate="fadeInRight"
+        >
+          {heading}
+        </AnimatedText>
       </div>
       <div className="flex rounded-full bg-white px-2 py-1.5 text-gray-600 ">
         <Search />
