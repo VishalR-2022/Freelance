@@ -3,7 +3,7 @@ import React from 'react';
 import { WithAdminLayout } from '@/layouts/admin/wrapper';
 
 function Index() {
-  return <div>Prooooooooooooooooooooooooducts</div>;
+  return <div className="flex h-screen">Prooooooooooooooooooooooooducts</div>;
 }
 
 export default WithAdminLayout({
