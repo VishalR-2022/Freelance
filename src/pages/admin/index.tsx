@@ -11,4 +11,5 @@ export default WithAdminLayout({
     { id: 1, label: 'Home', href: '/' },
     { id: 2, label: 'Admin', href: '/admin' },
   ],
+  heading: 'Dashboard',
 })(Index);

@@ -17,12 +17,10 @@ export const SIDEBAR_ITEMS: Items[] = [
     title: 'Products',
     path: '/admin/products',
   },
-
   {
     title: 'Tenants',
     path: '/admin/tenants',
   },
-
   {
     title: 'Users',
     path: '/admin/users',
