@@ -36,7 +36,7 @@ const Login = () => {
         className="mb-6 text-lg font-medium text-accent"
         animate="fadeIn"
       >
-        Sign in as Admin
+        Sign in as User!
       </AnimatedText>
       <div className="w-full rounded-lg shadow-2xl dark:border sm:max-w-md md:mt-0 xl:p-0">
         <div className="space-y-4 p-6 sm:p-8 md:space-y-6">

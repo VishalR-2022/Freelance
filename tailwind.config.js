@@ -8,15 +8,31 @@ module.exports = {
     themes: [
       {
         myTheme: {
-          primary: '#0a76ef',
-          secondary: '#393b38',
-          accent: '#ffc107',
+          primary: '#1a365d',
+          secondary: '#818ea2',
+          accent: '#312e81',
           neutral: '#a7a9ac',
-          'base-100': '#fffffd',
+          'base-100': '#f4f7fe',
           info: '#17a2b8',
           success: '#28a745',
           warning: '#dc3545',
           error: '#6c757d',
+        },
+        screens: {
+          sm: '640px',
+          // => @media (min-width: 640px) { ... }
+
+          md: '768px',
+          // => @media (min-width: 768px) { ... }
+
+          lg: '1024px',
+          // => @media (min-width: 1024px) { ... }
+
+          xl: '1280px',
+          // => @media (min-width: 1280px) { ... }
+
+          '2xl': '1536px',
+          // => @media (min-width: 1536px) { ... }
         },
       },
       'light',
