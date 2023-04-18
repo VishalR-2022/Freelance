@@ -1,6 +1,9 @@
+/* eslint-disable no-return-assign */
+/* eslint-disable no-param-reassign */
 import { Squash as Hamburger } from 'hamburger-react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import { useState } from 'react';
 import { IconContext } from 'react-icons';
 import { MdArrowBack, MdLightMode, MdPerson } from 'react-icons/md';
 
@@ -15,10 +18,11 @@ type NavbarProps = {
 };
 const Navbar = ({ path, heading }: NavbarProps) => {
   const router = useRouter();
+  const [isActive, setIsActive] = useState(router.pathname);
 
   return (
     <div>
-      <div className="navbar sticky top-0 mt-4 flex justify-between bg-base-100 p-6">
+      <div className="navbar sticky top-0 mt-0 flex justify-between bg-base-100 p-6 pt-2">
         <div className="flex flex-col items-start justify-start">
           <div className="breadcrumbs text-sm">
             <ul>
@@ -42,13 +46,13 @@ const Navbar = ({ path, heading }: NavbarProps) => {
           </div>
           <AnimatedText
             tag="h2"
-            className="text-3xl font-bold text-indigo-900"
+            className="text-3xl font-bold text-accent"
             animate="fadeInRight"
           >
             {heading}
           </AnimatedText>
         </div>
-        <div className="flex rounded-full bg-white px-2 py-1.5 text-gray-600 ">
+        <div className="hidden rounded-full bg-white px-2 py-1.5 text-gray-600 md:flex ">
           <Search />
           <div className="mx-2 flex rounded-full bg-base-100 p-3">
             <IconContext.Provider
@@ -58,7 +62,7 @@ const Navbar = ({ path, heading }: NavbarProps) => {
             </IconContext.Provider>
           </div>
           <div className="dropdown-end dropdown">
-            <label tabIndex={0} className="flex rounded-full bg-blue-600 p-3">
+            <label tabIndex={0} className="flex rounded-full bg-indigo-800 p-3">
               <IconContext.Provider
                 value={{ className: 'text-white text-2xl' }}
               >
@@ -84,47 +88,70 @@ const Navbar = ({ path, heading }: NavbarProps) => {
           </div>
         </div>
       </div>
-      <div className="btm-nav fixed bottom-0 md:hidden lg:hidden">
-        <button>
-          <label tabIndex={0} className="flex">
+      <div className="btm-nav fixed bottom-0 z-50 md:hidden lg:hidden">
+        <button onClick={() => router.back()}>
+          <label tabIndex={0} className=" z-50 flex">
             <IconContext.Provider value={{ className: 'text-black text-2xl' }}>
               <MdArrowBack />
             </IconContext.Provider>
           </label>
         </button>
         <button
-          className="active"
           onClick={() => {
             router.push('/logout');
           }}
         >
-          <IconContext.Provider value={{ className: 'text-white text-2xl' }}>
-            <MdPerson />
-          </IconContext.Provider>{' '}
+          <label className=" z-50 flex rounded-full bg-indigo-800 p-3">
+            <IconContext.Provider value={{ className: 'text-white text-2xl' }}>
+              <MdPerson />
+            </IconContext.Provider>
+          </label>
         </button>
         <button>
           <div className="drawer-mobile drawer">
             <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
-            <label htmlFor="my-drawer-2" className="flex justify-center">
+            <label htmlFor="my-drawer-2" className="z-50 flex justify-center">
               <Hamburger />
             </label>
             <div className="drawer-side">
               <label
                 htmlFor="my-drawer-2"
-                className="drawer-overlay opacity-0"
+                className="drawer-overlay bg-inherit opacity-0"
               ></label>
-              <ul className="menu fixed inset-x-0 top-0 z-40 h-5/6 w-full transform-none overflow-y-auto bg-white p-4 text-base-content transition-transform">
+              <ul className="menu fixed inset-x-0 top-0 z-40 h-screen w-full transform-none overflow-y-auto bg-white p-4 text-base-content transition-transform">
                 {SIDEBAR_ITEMS.map((sidebar) => (
-                  <li key={sidebar.title}>
-                    <a
+                  <li
+                    key={sidebar.title}
+                    className={`${
+                      isActive === sidebar.path ? 'bg-base-200' : ''
+                    } rounded-lg`}
+                  >
+                    <Link
+                      className={`${
+                        isActive === sidebar.path
+                          ? 'text-accent'
+                          : 'text-neutral'
+                      } cursor-pointer text-xl font-medium active:text-neutral`}
+                      href={sidebar.path}
                       onClick={() => {
-                        router.push(sidebar.path);
+                        setIsActive(sidebar.path);
                       }}
                     >
-                      <AnimatedText tag="h4" animate="fadeInRight">
+                      <IconContext.Provider
+                        value={{
+                          className: `${
+                            isActive === sidebar.path
+                              ? 'text-accent'
+                              : 'text-neutral'
+                          } text-md active:text-neutral`,
+                        }}
+                      >
+                        {sidebar.icon}
+                      </IconContext.Provider>
+                      <AnimatedText tag="h6" animate="fadeInRight">
                         {sidebar.title}
                       </AnimatedText>
-                    </a>
+                    </Link>
                   </li>
                 ))}
               </ul>

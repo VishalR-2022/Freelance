@@ -11,7 +11,7 @@ function Index() {
         className="text-xl font-medium"
         animate="fadeInRight"
       >
-        Dashboard
+        User
       </AnimatedText>
     </div>
   );
@@ -21,6 +21,7 @@ export default WithAdminLayout({
   breadcrumbs: [
     { id: 1, label: 'Home', href: '/' },
     { id: 2, label: 'Admin', href: '/admin' },
+    { id: 3, label: 'Users', href: '/admin/users' },
   ],
-  heading: 'Dashboard',
+  heading: 'User',
 })(Index);

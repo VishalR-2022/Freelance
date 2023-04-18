@@ -1,10 +1,7 @@
-import { Squash as Hamburger } from 'hamburger-react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { IconContext } from 'react-icons';
 import { MdArrowBack, MdLightMode, MdPerson } from 'react-icons/md';
-
-import { SIDEBAR_ITEMS } from '@/layouts/admin/sidebar';
 
 import AnimatedText from './animation/motionText';
 import Search from './Search';
@@ -34,7 +31,7 @@ const Navbar = ({ path, heading }: NavbarProps) => {
             })}
             <AnimatedText
               tag="h3"
-              className="text-3xl font-bold text-indigo-900"
+              className="text-3xl font-bold text-accent"
               animate="fadeInRight"
             >
               {heading}
@@ -51,7 +48,7 @@ const Navbar = ({ path, heading }: NavbarProps) => {
             </IconContext.Provider>
           </div>
           <div className="dropdown-end dropdown">
-            <label tabIndex={0} className="flex rounded-full bg-blue-600 p-3">
+            <label tabIndex={0} className="flex rounded-full bg-primary p-3">
               <IconContext.Provider
                 value={{ className: 'text-white text-2xl' }}
               >
@@ -67,7 +64,7 @@ const Navbar = ({ path, heading }: NavbarProps) => {
               <li>
                 <a
                   onClick={() => {
-                    router.push('/login');
+                    router.push('/login/user');
                   }}
                 >
                   Login as User
@@ -76,7 +73,7 @@ const Navbar = ({ path, heading }: NavbarProps) => {
               <li>
                 <a
                   onClick={() => {
-                    router.push('/login');
+                    router.push('/login/admin');
                   }}
                 >
                   Login as Admin
@@ -86,20 +83,20 @@ const Navbar = ({ path, heading }: NavbarProps) => {
           </div>
         </div>
       </div>
-      <div className="btm-nav fixed bottom-0 md:hidden lg:hidden">
-        <button>
-          <label tabIndex={0} className="flex">
+      <div className="btm-nav fixed bottom-0 z-50 md:hidden lg:hidden">
+        <button onClick={() => router.back()}>
+          <label tabIndex={0} className="z-50 flex">
             <IconContext.Provider value={{ className: 'text-black text-2xl' }}>
               <MdArrowBack />
             </IconContext.Provider>
           </label>
         </button>
-        <button className="active">
+        <button>
           <div className="drawer-mobile drawer">
             <input id="my-drawer-1" type="checkbox" className="drawer-toggle" />
             <label
               htmlFor="my-drawer-1"
-              className="mx-8 flex justify-center rounded-full bg-blue-600 p-4"
+              className="z-50 mx-12 flex justify-center rounded-full bg-primary p-4 pb-3"
             >
               <IconContext.Provider
                 value={{ className: 'text-white text-2xl' }}
@@ -112,13 +109,13 @@ const Navbar = ({ path, heading }: NavbarProps) => {
                 htmlFor="my-drawer-1"
                 className="drawer-overlay opacity-100"
               ></label>
-              <ul className="menu fixed inset-x-0 top-0 z-40 h-5/6 w-full transform-none overflow-y-auto bg-white p-4 text-base-content transition-transform">
+              <ul className="menu fixed inset-x-0 top-0 z-40 min-h-screen w-full transform-none overflow-y-auto bg-white p-4 text-base-content transition-transform">
                 <li className="p-4 font-bold">Welcome to Tryyon! </li>
                 <div className="divider m-0"></div>
                 <li>
                   <a
                     onClick={() => {
-                      router.push('/login');
+                      router.push('/login/user');
                     }}
                   >
                     Login as User
@@ -127,7 +124,7 @@ const Navbar = ({ path, heading }: NavbarProps) => {
                 <li>
                   <a
                     onClick={() => {
-                      router.push('/login');
+                      router.push('/login/admin');
                     }}
                   >
                     Login as Admin
@@ -138,30 +135,12 @@ const Navbar = ({ path, heading }: NavbarProps) => {
           </div>
         </button>
         <button>
-          <div className="drawer-mobile drawer">
-            <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
-            <label htmlFor="my-drawer-2" className="flex justify-center">
-              <Hamburger />
-            </label>
-            <div className="drawer-side">
-              <label
-                htmlFor="my-drawer-2"
-                className="drawer-overlay opacity-0"
-              ></label>
-              <ul className="menu fixed inset-x-0 top-0 z-40 h-5/6 w-full transform-none overflow-y-auto bg-white p-4 text-base-content transition-transform">
-                {SIDEBAR_ITEMS.map((sidebar) => (
-                  <li key={sidebar.title}>
-                    <a
-                      onClick={() => {
-                        router.push(sidebar.path);
-                      }}
-                    >
-                      {sidebar.title}
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </div>
+          <div className="mx-2 flex rounded-full bg-base-100 p-3">
+            <IconContext.Provider
+              value={{ className: 'text-gray-700 text-2xl' }}
+            >
+              <MdLightMode />
+            </IconContext.Provider>
           </div>
         </button>
       </div>
